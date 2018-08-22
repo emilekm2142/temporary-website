@@ -1,0 +1,99 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <style>
+        label{
+            text-family:'Oswald';
+        }
+        [for="id_html"],[for="id_css"],[for="id_js"] {
+            display: block;
+            float: left;
+            text-align: left;
+        }
+        [type="text"]{
+            display:block;
+
+        }
+        table{width:75%;margin:auto;}
+        tr{padding-top: 45px;}
+        textarea{
+            margin-bottom:10px ;
+            display: block;
+            float: left;
+        }
+        .sites-list{
+            list-style-type: none;
+
+        }
+        .sites-list li{
+            display: inline;
+        }
+        h1{}
+        .oswald{font-family: 'Oswald',sans-serif;}
+        .white{color:#ecf0f1;}
+        .full{width: 100%;}
+        .turq{background-color:#34495e;padding-bottom:5%;}
+        .turq ul li, .turq ul li a {color:#ecf0f1;}
+        .turq ul li a:hover {color:#2c3e50;}
+        form{margin-top: 5%;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'website/css/flat-ui.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'website/checkboxes.css' %}" />
+    <meta charset="UTF-8">
+    <title>Paste site</title>
+</head>
+<body>
+<section class="full turq">
+<div class="container white">
+<h1 class="oswald white">Paste site<small style="color:#bdc3c7;margin-left: 10px;">Easy way to paste html</small></h1>
+Recently pasted:
+<ul class="sites-list">
+{% for page in pages %}
+    <li>
+<a href="{% url 'viewSite' page.hash %}">{{ page.name }}</a>,
+    </li>
+{% endfor %}
+</ul>
+</div>
+</div>
+</section>
+<div class="container">
+<div style="text-align:center;">
+<h1 class="oswald">Paste your site here</h1>
+    <p> The main purpose of this tool is to provide quick and easy way to paste html without fucking with ftp and other stuff.</p>
+<p>You can't paste html with local images path.</p>
+</div>
+    <form method="POST" action="">
+<div class="form-group">
+<table>
+    {% csrf_token %}
+    {% for field in form %}
+                    <tr>
+<td>
+           {{ field }}<label for="{{ field.auto_id }}"><span class="ui"></span>{{ field.label }}</label>
+
+
+</td>
+
+                   </tr>
+
+    {% endfor %}
+<tr><td>   <input class="btn btn-primary" style="width:100%;" value="Paste!" type="submit"></td></tr>
+        </table>
+
+</div>
+    </form>
+<p>Python3 and Django <span style="color:red"><b><3</b></span></p>
+<p style="color:white">Fatal front-end, but I hate writing templates and views :c</p>
+</div>
+</body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="{% static 'website/flat-ui.min.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</html>

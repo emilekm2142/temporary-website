@@ -1,0 +1,1 @@
+web: gunicorn temponaryWebsite.wsgi --log-file -
